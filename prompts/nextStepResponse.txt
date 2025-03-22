@@ -1,0 +1,34 @@
+After creating and deploying the custom object to your Salesforce org, you need to perform a few additional steps to make it visible and accessible within the org. Here are the next steps:
+
+Add the Custom Object to a Tab:
+
+Navigate to Setup in your Salesforce org.
+In the Quick Find box, type Tabs and select Tabs.
+Click New in the Custom Object Tabs section.
+Select your custom object (Approved_Food_Establishments__c) from the Object dropdown.
+Choose a Tab Style and click Next.
+Select the profiles for which you want the tab to be available and click Next.
+Click Save.
+Add the Custom Object Tab to an App:
+
+Navigate to Setup in your Salesforce org.
+In the Quick Find box, type App Manager and select App Manager.
+Find the app where you want to add the custom object tab (e.g., Sales, Service) and click the dropdown arrow next to it, then select Edit.
+In the App Settings, click Navigation Items.
+Move your custom object (Approved_Food_Establishments__c) from the Available Items list to the Selected Items list.
+Click Save.
+Set Permissions for the Custom Object:
+
+Navigate to Setup in your Salesforce org.
+In the Quick Find box, type Profiles and select Profiles.
+Select the profile you want to modify (e.g., System Administrator).
+In the profile settings, find the Custom Object Permissions section.
+Click Edit and set the appropriate permissions (Read, Create, Edit, Delete) for your custom object (Approved_Food_Establishments__c).
+Click Save.
+Create a Custom Object Record:
+
+Navigate to the app where you added the custom object tab.
+Click on the tab for your custom object (Approved Food Establishments).
+Click New to create a new record.
+Fill in the fields and click Save.
+By following these steps, you will make the custom object visible and accessible in your Salesforce org, allowing users to create and view records for the Approved_Food_Establishments__c object.
