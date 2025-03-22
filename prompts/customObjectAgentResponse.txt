@@ -1,0 +1,97 @@
+To create a custom object in Salesforce and import it into your demo org using Salesforce CLI in Visual Studio Code, you need to follow these steps:
+
+Create the Custom Object Metadata File:
+Create a new folder in your project directory called objects.
+Inside the objects folder, create a new file named Approved_Food_Establishments__c.object-meta.xml
+
+Define the Custom Object Metadata:
+
+Open the Approved_Food_Establishments__c.object-meta.xml file and add the following XML code to define your custom object and its fields:
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Approved Food Establishments</label>
+    <pluralLabel>Approved Food Establishments</pluralLabel>
+    <nameField>
+        <label>Approved Food Establishment Name</label>
+        <type>Text</type>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>ReadWrite</sharingModel>
+    <fields>
+        <fullName>AppNo__c</fullName>
+        <label>App No</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>TradingName__c</fullName>
+        <label>Trading Name</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>Address1__c</fullName>
+        <label>Address 1</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>Address2__c</fullName>
+        <label>Address 2</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>Town__c</fullName>
+        <label>Town</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>Postcode__c</fullName>
+        <label>Postcode</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <label>Country</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>All_Activities__c</fullName>
+        <label>All Activities</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>Cold_Store__c</fullName>
+        <label>Cold Store</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>CompetentAuthority__c</fullName>
+        <label>Competent Authority</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+    <fields>
+        <fullName>GeographicLocalAuthority__c</fullName>
+        <label>Geographic Local Authority</label>
+        <type>Text</type>
+        <length>255</length>
+    </fields>
+</CustomObject>
+
+Deploy the Custom Object to Your Org:
+Open the terminal in Visual Studio Code.
+Use the Salesforce CLI to deploy the custom object metadata to your org. Run the following command:
+sfdx force:source:deploy -p path/to/objects/Approved_Food_Establishments__c.object-meta.xml
+Replace path/to/objects/ with the actual path to your objects folder.
+
+Verify the Deployment:
+Log in to your Salesforce org and navigate to the Object Manager.
+Verify that the Approved_Food_Establishments__c object has been created with the specified fields.
+By following these steps, you will create a custom object called Approved_Food_Establishments__c with the specified fields and deploy it to your Salesforce org using Salesforce CLI in Visual Studio Code.
