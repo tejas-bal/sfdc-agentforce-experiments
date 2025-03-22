@@ -1,1 +1,0 @@
-I want to create a custom object called Approved_Food_Establishments__c with columns AppNo, TradingName, Address1, Address2, Town, Postcode, Country, All_Activities, Cold_Store, CompetentAuthority, GeographicLocalAuthority. Suggest how I can do this.
