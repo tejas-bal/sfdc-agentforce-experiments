@@ -36,9 +36,9 @@ public class ImportApprovedFoodEstablishments {
                 record.Postcode__c = columns[5];
                 record.Country__c = columns[6];
                 record.All_Activities__c = columns[7];
-                record.Cold_Store__c = columns[8];
-                record.CompetentAuthority__c = columns[9];
-                record.GeographicLocalAuthority__c = columns[10];
+                record.Cold_Store__c = columns[39];
+                record.CompetentAuthority__c = columns[63];
+                record.GeographicLocalAuthority__c = columns[64];
                 
                 recordsToInsert.add(record);
             }
