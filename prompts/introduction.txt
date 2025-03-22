@@ -1,1 +1,0 @@
-I am Salesforce Developer and today and I want help in writing metadata code to create an object and import it into my demo org using Salesforce CLI in Visual Studio Code.
