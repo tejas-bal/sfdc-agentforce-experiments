@@ -1,0 +1,82 @@
+To create an Apex class in Visual Studio Code to import data into the Approved_Food_Establishments__c custom object from a CSV file hosted at the provided URL, you need to follow these steps:
+
+Set Up Remote Site Settings:
+
+In Salesforce Setup, navigate to Remote Site Settings.
+Click New Remote Site.
+Enter a name for the remote site (e.g., FSAOpenData).
+Enter the URL: https://fsaopendata.blob.core.windows.net.
+Click Save.
+Create the Apex Class:
+
+In Visual Studio Code, create a new Apex class file named ImportApprovedFoodEstablishments.cls.
+Add the following code to the class:
+
+public class ImportApprovedFoodEstablishments {
+    public void importData() {
+        // Define the URL of the CSV file
+        String url = 'https://fsaopendata.blob.core.windows.net/opendatacatalog/APMSMar25.csv';
+        
+        // Make the HTTP request
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(url);
+        request.setMethod('GET');
+        
+        HttpResponse response = http.send(request);
+        
+        // Check the response status
+        if (response.getStatusCode() == 200) {
+            // Get the CSV content
+            String csvContent = response.getBody();
+            
+            // Parse the CSV content
+            List<Approved_Food_Establishments__c> recordsToInsert = new List<Approved_Food_Establishments__c>();
+            List<String> csvLines = csvContent.split('\n');
+            
+            // Skip the header line
+            for (Integer i = 1; i < csvLines.size(); i++) {
+                String line = csvLines[i];
+                List<String> columns = line.split(',');
+                
+                // Create a new record and set the fields
+                Approved_Food_Establishments__c record = new Approved_Food_Establishments__c();
+                record.AppNo__c = columns[0];
+                record.TradingName__c = columns[1];
+                record.Address1__c = columns[2];
+                record.Address2__c = columns[3];
+                record.Town__c = columns[4];
+                record.Postcode__c = columns[5];
+                record.Country__c = columns[6];
+                record.All_Activities__c = columns[7];
+                record.Cold_Store__c = columns[8];
+                record.CompetentAuthority__c = columns[9];
+                record.GeographicLocalAuthority__c = columns[10];
+                
+                recordsToInsert.add(record);
+            }
+            
+            // Insert the records
+            if (!recordsToInsert.isEmpty()) {
+                insert recordsToInsert;
+            }
+        } else {
+            System.debug('Failed to fetch CSV content. Status code: ' + response.getStatusCode());
+        }
+    }
+}
+
+Deploy the Apex Class to Your Org:
+Open the terminal in Visual Studio Code.
+Use the Salesforce CLI to deploy the Apex class to your org. Run the following command:
+sfdx force:source:deploy -p path/to/your/apex/classes/ImportApprovedFoodEstablishments.cls
+Replace path/to/your/apex/classes/ with the actual path to your Apex class file.
+
+Execute the Apex Class:
+In Salesforce Setup, navigate to Apex Classes.
+Click Execute Anonymous.
+Enter the following code to execute the import:
+ImportApprovedFoodEstablishments importer = new ImportApprovedFoodEstablishments();
+importer.importData();
+Click Execute.
+By following these steps, you will create an Apex class that fetches the CSV content from the provided URL, parses it, and inserts records into the Approved_Food_Establishments__c custom object. Make sure to handle any potential errors and edge cases as needed.
