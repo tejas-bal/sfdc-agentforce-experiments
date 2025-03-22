@@ -1,0 +1,69 @@
+To get the correct column indexes for the fields AppNo, TradingName, Address1, Address2, Town, Postcode, Country, All_Activities, Cold_Store, CompetentAuthority, and GeographicLocalAuthority, you need to map each field to its corresponding index in the CSV header. Here are the indexes based on the provided CSV header:
+
+AppNo is at index 0
+TradingName is at index 1
+Address1 is at index 2
+Address2 is at index 3
+Town is at index 5
+Postcode is at index 6
+Country is at index 7
+All_Activities is at index 8
+Cold_Store is at index 39
+CompetentAuthority is at index 63
+GeographicLocalAuthority is at index 64
+Here is the updated Apex class with the correct column indexes:
+
+public class ImportApprovedFoodEstablishments {
+    public void importData() {
+        // Define the URL of the CSV file
+        String url = 'https://fsaopendata.blob.core.windows.net/opendatacatalog/APMSMar25.csv';
+        
+        // Make the HTTP request
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(url);
+        request.setMethod('GET');
+        
+        HttpResponse response = http.send(request);
+        
+        // Check the response status
+        if (response.getStatusCode() == 200) {
+            // Get the CSV content
+            String csvContent = response.getBody();
+            
+            // Parse the CSV content
+            List<Approved_Food_Establishments__c> recordsToInsert = new List<Approved_Food_Establishments__c>();
+            List<String> csvLines = csvContent.split('\n');
+            
+            // Skip the header line
+            for (Integer i = 1; i < csvLines.size(); i++) {
+                String line = csvLines[i];
+                List<String> columns = line.split(',');
+                
+                // Create a new record and set the fields
+                Approved_Food_Establishments__c record = new Approved_Food_Establishments__c();
+                record.AppNo__c = columns[0];
+                record.TradingName__c = columns[1];
+                record.Address1__c = columns[2];
+                record.Address2__c = columns[3];
+                record.Town__c = columns[5];
+                record.Postcode__c = columns[6];
+                record.Country__c = columns[7];
+                record.All_Activities__c = columns[8];
+                record.Cold_Store__c = columns[39];
+                record.CompetentAuthority__c = columns[63];
+                record.GeographicLocalAuthority__c = columns[64];
+                
+                recordsToInsert.add(record);
+            }
+            
+            // Insert the records
+            if (!recordsToInsert.isEmpty()) {
+                insert recordsToInsert;
+            }
+        } else {
+            System.debug('Failed to fetch CSV content. Status code: ' + response.getStatusCode());
+        }
+    }
+}
+This Apex class will correctly map the CSV columns to the fields of the Approved_Food_Establishments__c custom object based on the provided indexes.
